@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Young Shift – Creative Digital Agency</title>
+    <meta name="description" content="Young Shift is a forward-thinking digital agency that helps brands shift into the future with bold design, strategy, and technology." />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ==================== RESET & BASE ==================== */
+        *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #ffffff;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ==================== LAYOUT ==================== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* ==================== HEADER & NAV ==================== */
+        header {
+            background: #fff; /* White background – no black */
+            box-shadow: 0 2px 10px rgba(0,0,0,.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+        .logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 90px;          /* Adjust as needed */
+            width: auto;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,.1));
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            font-weight: 500;
+            transition: color .3s;
+        }
+        .nav-links a:hover { color: #e63946; } /* Matches red in logo */
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: .35rem;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #222;
+            transition: .3s;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: linear-gradient(135deg, #e63946 0%, #a51c30 100%);
+            color: #fff;
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: .5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 1rem auto 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #e63946;
+            padding: .75rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,.2);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section { padding: 5rem 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            color: #222;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #e63946;
+            display: block;
+            margin: .75rem auto 0;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .about-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+            text-align: center;
+        }
+        .about-card i {
+            font-size: 2.5rem;
+            color: #e63946;
+            margin-bottom: 1rem;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+            transition: transform .3s;
+        }
+        .service-card:hover { transform: translateY(-8px); }
+        .service-img {
+            height: 200px;
+            background: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        .service-body {
+            padding: 1.5rem;
+        }
+        .service-body h3 { margin-bottom: .5rem; }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+        }
+        .portfolio-item img {
+            transition: transform .4s;
+        }
+        .portfolio-item:hover img { transform: scale(1.08); }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(230,57,70,.9);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .4s;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f8f9fa;
+        }
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+        }
+        .testimonial-card {
+            min-width: 300px;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+            scroll-snap-align: start;
+        }
+        .testimonial-card p { font-style: italic; margin-bottom: 1rem; }
+        .testimonial-card .author { font-weight: 600; color: #e63946; }
+
+        /* Contact */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: .4rem;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: .75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #ddd;
+            text-align: center;
+            padding: 2.5rem 0;
+            font-size: .9rem;
+        }
+        footer a { color: #e63946; }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .nav-links { 
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: #fff;
+                width: 100%;
+                flex-direction: column;
+                padding: 2rem 0;
+                transition: right .4s;
+                box-shadow: 0 4px 10px rgba(0,0,0,.1);
+            }
+            .nav-links.active { right: 0; }
+            .hamburger { display: flex; }
+
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+            .logo img { height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container nav">
+            <!-- YOUR REAL LOGO (transparent) -->
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Young Shift Logo">
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>We Shift Brands Forward</h1>
+            <p>Bold design, smart strategy, and cutting-edge technology for the next generation of businesses.</p>
+            <a href="#contact" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Why Young Shift?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Future-Focused</h3>
+                    <p>We anticipate trends and build solutions that last beyond today.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Creative Strategy</h3>
+                    <p>Data-driven creativity that turns insights into impact.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Client Partnership</h3>
+                    <p>We work as an extension of your team, not just a vendor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section id="services" style="background:#fff;">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-body">
+                        <h3>Web Development</h3>
+                        <p>Custom, responsive, and lightning-fast websites built with modern frameworks.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1562577308-9e3e6b2be391?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-body">
+                        <h3>Brand Identity</h3>
+                        <p>Logo design, visual systems, and brand guidelines that resonate.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-body">
+                        <h3>Digital Marketing</h3>
+                        <p>SEO, PPC, social media, and content strategies that drive growth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO ==================== -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Recent Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1519389950477-9b1bcd2b2e0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                    <div class="portfolio-overlay">
+                        <h3>E-Commerce Platform</h3>
+                        <p>React + Node.js</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                    <div class="portfolio-overlay">
+                        <h3>Brand Redesign</h3>
+                        <p>Figma & Illustrator</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3">
+                    <div class="portfolio-overlay">
+                        <h3>SaaS Dashboard</h3>
+                        <p>Vue + Tailwind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p>“Young Shift transformed our online presence. Traffic tripled in 3 months!”</p>
+                    <div class="author">— Sarah L., CEO, TechStart</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Creative, fast, and truly collaborative. Best agency experience ever.”</p>
+                    <div class="author">— Mike R., Founder, UrbanWear</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Their branding work gave us a fresh identity that customers love.”</p>
+                    <div class="author">— Emily T., Marketing Director, FreshBites</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Let’s Talk</h2>
+            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width:100%; background:#e63946; color:#fff;">Send Message</button>
+            </form>
+            <p style="text-align:center; margin-top:1.5rem;">
+                <a href="mailto:hello@youngshift.com">hello@youngshift.com</a> | 
+                <a href="tel:+1234567890">+1 (234) 567-890</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <p>© <span id="year"></span> Young Shift. All rights reserved. |
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
